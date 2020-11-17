@@ -4,7 +4,7 @@ class TmdbAPI extends RESTDataSource {
   constructor() {
     super();
     this.baseURL = 'https://api.themoviedb.org/3';
-    this.api_key = process.env.THE_MOVIE_DB_API_KEY;
+    this.api_key = THE_MOVIE_DB_API_KEY;
   }
 
   async search(query) {

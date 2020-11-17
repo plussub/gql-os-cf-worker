@@ -4,11 +4,11 @@ class OpensubtitleAPI extends RESTDataSource {
   constructor() {
     super();
     this.baseURL = 'https://rest.opensubtitles.org/search';
-    this.headers = { 'X-User-Agent': 'TemporaryUserAgent' };
+    this.headers = { 'Api-Key': OPEN_SUBTITLES_API_KEY };
   }
 
-  async search({ imdbId, language }) {
-    return this.get(`https://rest.opensubtitles.org/search/imdbid-${imdbId}/sublanguageid-${language}`, undefined, { headers: this.headers });
+  async search({ tmdb_id, language }) {
+    return this.get(`https://www.opensubtitles.com/api/v1/subtitles`, {tmdb_id, languages:language }, { headers: this.headers });
   }
 }
 
