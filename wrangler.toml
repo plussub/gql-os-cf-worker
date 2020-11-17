@@ -1,0 +1,7 @@
+name = "plussub-gql-cf-worker-v2"
+type = "webpack"
+account_id = "0deb6904a84bcbf6a64da04c519f1e9e"
+workers_dev = true
+route = ""
+zone_id = ""
+webpack_config = "webpack.config.js"

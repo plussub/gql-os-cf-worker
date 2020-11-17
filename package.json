@@ -1,0 +1,23 @@
+{
+  "name": "gql-cf-worker-v2",
+  "private": true,
+  "description": "🔥Lightning-fast, globally distributed Apollo GraphQL server, deployed at the edge using Cloudflare Workers",
+  "version": "1.1.0",
+  "author": "stefanbreitenstein <stefan.breitenstein@tt-s.com>",
+  "dependencies": {
+    "apollo-datasource-rest": "^0.9.3",
+    "apollo-server-cloudflare": "^2.15.1",
+    "graphql": "^15.2.0",
+    "webpack": "^4.43.0"
+  },
+  "license": "MIT",
+  "main": "src/index.js",
+  "prettier": {
+    "trailingComma": "none",
+    "printWidth": 200,
+    "singleQuote": true
+  },
+  "devDependencies": {
+    "prettier": "^2.0.5"
+  }
+}
