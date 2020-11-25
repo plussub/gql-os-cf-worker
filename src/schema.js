@@ -72,7 +72,7 @@ module.exports = gql`
         feature_details: SubtitleSearchResultDataAttributesFeatureDetails,
         url: String,
         related_links: SubtitleSearchResultDataAttributesRelatedLinks,
-        files: SubtitleSearchResultDataAttributesFiles
+        files: [SubtitleSearchResultDataAttributesFiles]
     }
 
 
@@ -104,8 +104,18 @@ module.exports = gql`
         file_name: String
     }
     
+    type SubtitleDownloadResult {
+        link: String,
+        fname: String,
+        requests: Int,
+        allowed: Int,
+        remaining: Int,
+        message: String
+    }
+    
     type Query {
         videoSearch(query: String!): VideoSearchResult
-        subtitleSearch(tmdb_id: String!, language: String!, media_type: String!): SubtitleSearchResult
+        subtitleSearch(tmdb_id: String!, language: String!): SubtitleSearchResult
+        subtitleDownload(file_id: Int!): SubtitleDownloadResult
     }
 `;
