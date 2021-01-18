@@ -38,32 +38,25 @@ const handleRequest = async request => {
   const url = new URL(request.url)
   try {
     if (url.pathname === graphQLOptions.baseEndpoint) {
-      const response =
-        request.method === 'OPTIONS'
-          ? new Response('', { status: 204 })
-          : await apollo(request, graphQLOptions)
-      return response
-    } else if (
-      graphQLOptions.playgroundEndpoint &&
-      url.pathname === graphQLOptions.playgroundEndpoint
-    ) {
+      if( request.method === 'OPTIONS'){
+        return new Response('', {status: 204})
+      } else {
+        return apollo(request, graphQLOptions)
+      }
+    } else if (graphQLOptions.playgroundEndpoint && url.pathname === graphQLOptions.playgroundEndpoint) {
       return playground(request, graphQLOptions)
     } else if (graphQLOptions.forwardUnmatchedRequestsToOrigin) {
-      return  fetch(request);
+      return fetch(request);
     } else {
-      return new Response('Not found', { status: 404 })
+      return new Response('Not found', {status: 404})
     }
   } catch (err) {
-    const response = new Response(graphQLOptions.debug ? err : 'Something went wrong', { status: 500 });
-    setCors(response);
-    return response;
+    return new Response(graphQLOptions.debug ? err : 'Something went wrong', {status: 500});
   }
 }
 
 addEventListener('fetch', event => {
-  const response = handleRequest(event.request);
+  const result = handleRequest(event.request).then(r => setCors(r));
 
-  setCors(response);
-
-  event.respondWith(response);
+  event.respondWith(result);
 })

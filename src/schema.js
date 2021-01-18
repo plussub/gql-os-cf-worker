@@ -106,6 +106,6 @@ module.exports = gql`
     
     type Query {
         videoSearch(query: String!): VideoSearchResult
-        subtitleSearch(tmdb_id: String!, language: String!): SubtitleSearchResult
+        subtitleSearch(tmdb_id: String!, language: String!, season_number: Int, episode_number: Int): SubtitleSearchResult
     }
 `;

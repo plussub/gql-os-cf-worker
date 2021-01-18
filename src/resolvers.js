@@ -12,8 +12,8 @@ module.exports = {
       };
     },
 
-    subtitleSearch: async (_source, { tmdb_id, language, media_type }, { dataSources }) => {
-      return dataSources.openSubtitleAPI.search({ tmdb_id, language });
+    subtitleSearch: async (_source, { tmdb_id, language, season_number, episode_number }, { dataSources }) => {
+      return dataSources.openSubtitleAPI.search({ tmdb_id, language, season_number, episode_number });
     }
   }
 };
