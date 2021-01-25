@@ -12,6 +12,14 @@ module.exports = {
       };
     },
 
+    seasons: async(_source, {tmdb_id, language}, {dataSources}) => {
+      const result = await dataSources.tmdbAPI.seasons({tmdb_id, language});
+      return {
+        ...result,
+        seasons: result.seasons.filter(e => e.season_number > 0)
+      };
+    },
+
     subtitleSearch: async (_source, { tmdb_id, language, season_number, episode_number }, { dataSources }) => {
       return dataSources.openSubtitleAPI.search({ tmdb_id, language, season_number, episode_number });
     }

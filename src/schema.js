@@ -34,6 +34,16 @@ module.exports = gql`
         media_type: String
     }
 
+    type SeasonsResult {
+        seasons: [Seasons]
+    }
+    
+    type Seasons {
+        id: Int,
+        season_number: Int,
+        episode_count: Int
+    }
+    
     type SubtitleSearchResult {
         total_pages: Int,
         total_count: Int,
@@ -106,6 +116,7 @@ module.exports = gql`
     
     type Query {
         videoSearch(query: String!): VideoSearchResult
+        seasons(tmdb_id: String!, language: String!): SeasonsResult
         subtitleSearch(tmdb_id: String!, language: String!, season_number: Int, episode_number: Int): SubtitleSearchResult
     }
 `;
