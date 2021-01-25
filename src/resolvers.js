@@ -1,3 +1,5 @@
+const iso639Map = require('./iso639Map.json');
+
 module.exports = {
   Query: {
     videoSearch: async (_source, { query }, { dataSources }) => {
@@ -21,7 +23,32 @@ module.exports = {
     },
 
     subtitleSearch: async (_source, { tmdb_id, language, season_number, episode_number }, { dataSources }) => {
-      return dataSources.openSubtitleAPI.search({ tmdb_id, language, season_number, episode_number });
+      return dataSources.openSubtitlesAPI.search({ tmdb_id, language, season_number, episode_number });
+    },
+
+    /**
+     * @deprecated
+     */
+    legacySubtitleSearch: async (_source, { tmdb_id, language, media_type }, { dataSources }) => {
+      const getImdb = async () =>
+        media_type === 'tv'
+          ? dataSources.tmdbAPI
+            .tvInformation({ tmdb_id })
+            .then(({ external_ids: { imdb_id } }) => imdb_id)
+            .then((imdb_id) => imdb_id.replace('tt', ''))
+          : dataSources.tmdbAPI.movieInformation({ tmdb_id }).then(({ imdb_id }) => imdb_id.replace('tt', ''));
+
+      const imdbId = await getImdb();
+      const entries = (await dataSources.legacyOpenSubtitlesAPI.search({ imdbId, language: iso639Map[language] }))
+        .filter(({ SubFormat }) => {
+          const format = SubFormat.toLowerCase();
+          return format === 'srt' || format === 'vtt';
+        })
+        .sort((a, b) => parseInt(b.SubRating, 10) - parseInt(a.SubRating, 10))
+      // (a, b) => a.SubRating.localeCompare(b.SubRating)
+      return {
+        entries
+      };
     }
   }
 };
