@@ -2,7 +2,7 @@ const {gql} = require('apollo-server-cloudflare');
 
 module.exports = gql`
     type VideoSearchResult {
-        entries: [VideoSearchResultEntry]
+        entries: [VideoSearchResultEntry!]!
     }
 
     type VideoSearchResultEntry {
@@ -13,62 +13,62 @@ module.exports = gql`
         "e.g: Jack Reacher must uncover the truth behind a major government conspiracy in order to clear his name. On the run as a fugitive from the law, Reacher uncovers a potential secret from his past that could change his life forever."
         overview: String
         "e.g: 2016-10-19"
-        release_date: String
+        release_date: String!
         genre_ids: [Int]
         "e.g: Jack Reacher: Never Go Back"
         original_title: String
         "e.g: en"
         original_language: String
         "e.g: Jack Reacher: Never Go Back"
-        title: String
+        title: String!
         "e.g: /4ynQYtSEuU5hyipcGkfD6ncwtwz.jpg"
         backdrop_path: String
         "e.g: 26.818468"
         popularity: Float
         "e.g: 201"
-        vote_count: Int
+        vote_count: Int!
         video: Boolean
         "e.g: 4.19"
-        vote_average: Float,
+        vote_average: Float!,
         "e.g. tv or movie"
-        media_type: String
+        media_type: String!
     }
 
     type SeasonsResult {
-        seasons: [Seasons]
+        seasons: [Seasons!]!
     }
     
     type Seasons {
-        id: Int,
-        season_number: Int,
-        episode_count: Int
+        id: Int!,
+        season_number: Int!,
+        episode_count: Int!
     }
     
     type SubtitleSearchResult {
-        total_pages: Int,
-        total_count: Int,
-        page: Int,
-        data: [SubtitleSearchResultData]
+        total_pages: Int!,
+        total_count: Int!,
+        page: Int!,
+        data: [SubtitleSearchResultData!]!
     }
 
     type SubtitleSearchResultData {
-        id: String,
-        type: String,
-        attributes: SubtitleSearchResultDataAttributes
+        id: String!,
+        type: String!,
+        attributes: SubtitleSearchResultDataAttributes!
     }
 
     type SubtitleSearchResultDataAttributes {
         subtitle_id: String,
-        language: String,
+        language: String!,
         download_count: Int,
         new_download_count: Int,
-        hearing_impaired: Boolean,
+        hearing_impaired: Boolean!,
         hd: Boolean,
         format: String,
         fps: Int,
         votes: Int,
         points: Float,
-        ratings: Float,
+        ratings: Float!,
         from_trusted: Boolean,
         foreign_parts_only: Boolean,
         auto_translation: Boolean,
@@ -80,9 +80,9 @@ module.exports = gql`
         legacy_subtitle_id: String,
         uploader: SubtitleSearchResultDataAttributesUploader,
         feature_details: SubtitleSearchResultDataAttributesFeatureDetails,
-        url: String,
+        url: String!,
         related_links: SubtitleSearchResultDataAttributesRelatedLinks,
-        files: [SubtitleSearchResultDataAttributesFiles]
+        files: [SubtitleSearchResultDataAttributesFiles!]!
     }
 
 
@@ -109,13 +109,13 @@ module.exports = gql`
     }
 
     type SubtitleSearchResultDataAttributesFiles {
-        file_id: Int,
+        file_id: Int!,
         cd_number: Int,
         file_name: String
     }
 
     type LegacySubtitleSearchResult {
-        entries: [LegacySubtitleSearchResultEntry]
+        entries: [LegacySubtitleSearchResultEntry!]!
     }
 
     type LegacySubtitleSearchResultEntry {
@@ -138,7 +138,7 @@ module.exports = gql`
         "e.g: YIFY"
         InfoReleaseGroup: String
         "e.g: English"
-        LanguageName: String
+        LanguageName: String!
         "e.g: imdbid"
         MatchedBy: String
         "e.g: 0"
@@ -186,7 +186,7 @@ module.exports = gql`
         "e.g: 0"
         SubComments: Int
         "e.g: https://dl.opensubtitles.org/en/download/src-api/vrf-19b00c54/filead/1954351726.gz"
-        SubDownloadLink: String
+        SubDownloadLink: String!
         "e.g: 126450"
         SubDownloadsCnt: Int
         "e.g: UTF-8"
@@ -194,17 +194,17 @@ module.exports = gql`
         "e.g: 0"
         SubFeatured: Int
         "e.g: Pulp.Fiction.1994.720p.BrRip.x264.YIFY.eng.srt"
-        SubFileName: String
+        SubFileName: String!
         "e.g: 0"
         SubForeignPartsOnly: Int
         "e.g: srt"
-        SubFormat: String
+        SubFormat: String!
         "e.g: 1"
         SubFromTrusted: Int
         "e.g: 1"
         SubHD: Int
         "e.g: db22e66b48e765c6ae0ed126844befa4"
-        SubHash: String
+        SubHash: String!
         "e.g: 0"
         SubHearingImpaired: Int
         "e.g: eng"
@@ -212,7 +212,7 @@ module.exports = gql`
         "e.g: 02:29:10"
         SubLastTS: String
         "e.g: 10.0"
-        SubRating: Float
+        SubRating: Float!
         "e.g: 198268"
         SubSize: Int
         "e.g: 1"
@@ -226,7 +226,7 @@ module.exports = gql`
         "e.g: "
         SubTranslator: String
         "e.g: http://www.opensubtitles.org/en/subtitles/5773582/pulp-fiction-en"
-        SubtitlesLink: String
+        SubtitlesLink: String!
         "e.g: 1012060"
         UserID: Int
         "e.g: SuperMau"
@@ -234,13 +234,13 @@ module.exports = gql`
         "e.g: trusted"
         UserRank: String
         "e.g: https://dl.opensubtitles.org/en/download/src-api/vrf-f5660bbe/subad/5773582"
-        ZipDownloadLink: String
+        ZipDownloadLink: String!
     }
     
     type Query {
-        videoSearch(query: String!): VideoSearchResult
-        seasons(tmdb_id: String!, language: String!): SeasonsResult
-        subtitleSearch(tmdb_id: String!, language: String!, season_number: Int, episode_number: Int): SubtitleSearchResult,
-        legacySubtitleSearch(tmdb_id: String!, language: String!, media_type: String!): LegacySubtitleSearchResult
+        videoSearch(query: String!): VideoSearchResult!
+        seasons(tmdb_id: String!, language: String!): SeasonsResult!
+        subtitleSearch(tmdb_id: String!, language: String!, season_number: Int, episode_number: Int): SubtitleSearchResult!,
+        legacySubtitleSearch(tmdb_id: String!, language: String!, media_type: String!): LegacySubtitleSearchResult!
     }
 `;
