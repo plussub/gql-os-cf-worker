@@ -13,6 +13,7 @@ class OpenSubtitlesApi extends RESTDataSource {
 
     return this.get(`subtitles`, {
       tmdb_id,
+      order_by: 'ratings',
       languages: language,
       ...seasonNumberObj,
       ...episodeNumberObj
