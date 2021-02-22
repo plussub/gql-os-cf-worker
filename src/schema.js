@@ -243,4 +243,8 @@ module.exports = gql`
         subtitleSearch(tmdb_id: String!, language: String!, season_number: Int, episode_number: Int): SubtitleSearchResult!,
         legacySubtitleSearch(tmdb_id: String!, language: String!, media_type: String!): LegacySubtitleSearchResult!
     }
+    
+    type Mutation{
+        track(origin: String!, source: String!, language: String!): String!
+    }
 `;

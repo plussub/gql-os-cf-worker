@@ -50,5 +50,16 @@ module.exports = {
         entries
       };
     }
+  },
+  Mutation: {
+    // origin could be part from the context because that are header information
+    track: async (_source, {origin, language, source}, {dataSources}) => {
+      await dataSources.trackAPI.track({
+        origin,
+        language,
+        source
+      });
+      return "done";
+    }
   }
 };
