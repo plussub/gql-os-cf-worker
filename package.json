@@ -5,10 +5,13 @@
   "version": "1.1.0",
   "author": "stefanbreitenstein <stefan.breitenstein@tt-s.com>",
   "dependencies": {
-    "apollo-datasource-rest": "^0.9.3",
-    "apollo-server-cloudflare": "^2.15.1",
-    "graphql": "^15.2.0",
+    "apollo-datasource-rest": "^0.3.2",
+    "apollo-server-cloudflare": "^2.21.0",
+    "graphql": "^14.2.1",
     "webpack": "^4.43.0"
+  },
+  "scripts": {
+    "dev": "wrangler -e dev dev"
   },
   "license": "MIT",
   "main": "src/index.js",
