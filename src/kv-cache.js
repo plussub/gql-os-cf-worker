@@ -1,4 +1,4 @@
-class KVCache {
+export class KVCache {
   get(key) {
     return WORKERS_GRAPHQL_CACHE.get(key)
   }
@@ -12,5 +12,3 @@ class KVCache {
     return WORKERS_GRAPHQL_CACHE.put(key, value, opts)
   }
 }
-
-module.exports = KVCache

@@ -1,6 +1,7 @@
-const { RESTDataSource } = require('apollo-datasource-rest');
+import { RESTDataSource } from 'apollo-datasource-rest';
 
-class TrackAPI extends RESTDataSource {
+
+export class TrackApi extends RESTDataSource {
   constructor() {
     super();
     this.baseURL = 'https://le4lquqmc1.execute-api.eu-west-1.amazonaws.com';
@@ -8,11 +9,9 @@ class TrackAPI extends RESTDataSource {
 
   async track({origin, language, source}) {
     return this.post('/', {
-        origin,
-        source,
-        language
-      });
+      origin,
+      source,
+      language
+    });
   }
 }
-
-module.exports = TrackAPI;

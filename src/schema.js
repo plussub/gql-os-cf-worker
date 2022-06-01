@@ -1,6 +1,7 @@
-const {gql} = require('apollo-server-cloudflare');
+import { gql } from 'apollo-server-cloudflare';
 
-module.exports = gql`
+
+export const schema = gql`
     type VideoSearchResult {
         entries: [VideoSearchResultEntry!]!
     }

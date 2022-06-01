@@ -1,6 +1,6 @@
-const { RESTDataSource } = require('apollo-datasource-rest');
+import { RESTDataSource } from 'apollo-datasource-rest';
 
-class TmdbAPI extends RESTDataSource {
+export class TmdbApi extends RESTDataSource {
   constructor() {
     super();
     this.baseURL = 'https://api.themoviedb.org/3';
@@ -40,5 +40,3 @@ class TmdbAPI extends RESTDataSource {
     return this.get(`tv/${tmdb_id}`, { append_to_response: 'external_ids', api_key: this.api_key });
   }
 }
-
-module.exports = TmdbAPI;

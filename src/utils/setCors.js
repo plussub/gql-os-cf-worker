@@ -1,4 +1,4 @@
-const setCorsHeaders = (response) => {
+export const setCors = (response) => {
   if(!response || !response.headers){
     return response;
   }
@@ -9,5 +9,3 @@ const setCorsHeaders = (response) => {
   response.headers.set('X-Content-Type-Options', 'nosniff');
   return response;
 }
-
-module.exports = setCorsHeaders

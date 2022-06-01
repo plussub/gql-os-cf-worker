@@ -1,12 +1,13 @@
-const {RESTDataSource} = require('apollo-datasource-rest');
+import { RESTDataSource } from 'apollo-datasource-rest';
 
-class OpenSubtitlesApi extends RESTDataSource {
+
+export class OpenSubtitlesApi extends RESTDataSource {
   constructor() {
     super();
     this.baseURL = 'https://api.opensubtitles.com/api/v1/';
     this.headers = {
       'Api-Key': OPEN_SUBTITLES_API_KEY,
-      'User-Agent': 'plussub-1.1.0'
+      'User-Agent': 'opensubtitles-extension-1.1.0'
     };
   }
 
@@ -22,5 +23,3 @@ class OpenSubtitlesApi extends RESTDataSource {
     }, {headers: this.headers});
   }
 }
-
-module.exports = OpenSubtitlesApi;

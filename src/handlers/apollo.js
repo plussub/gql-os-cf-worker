@@ -1,35 +1,34 @@
-const { ApolloServer } = require('apollo-server-cloudflare')
-const { graphqlCloudflare } = require('apollo-server-cloudflare/dist/cloudflareApollo')
+import { ApolloServer } from 'apollo-server-cloudflare';
 
-const KVCache = require('../kv-cache')
-const TmdbAPI = require('../datasources/tmdbApi')
-const TrackAPI = require('../datasources/trackApi')
-const OpensubtitlesAPI = require('../datasources/opensubtitlesApi')
-const LegacyOpenSubtitlesApi = require('../datasources/legacyOpenSubtitlesApi')
-const resolvers = require('../resolvers')
-const typeDefs = require('../schema')
+import { graphqlCloudflare } from 'apollo-server-cloudflare/dist/cloudflareApollo';
+
+import {TmdbApi} from '../datasources/tmdbApi';
+import {OpenSubtitlesApi} from '../datasources/openSubtitlesApi';
+import {TrackApi} from '../datasources/trackApi';
+
+import {KVCache} from '../kv-cache';
+import { resolvers } from '../resolvers';
+
+import {schema} from '../schema';
 
 const dataSources = () => ({
-    tmdbAPI: new TmdbAPI(),
-    openSubtitlesAPI: new OpensubtitlesAPI(),
-    legacyOpenSubtitlesAPI: new LegacyOpenSubtitlesApi(),
-    trackAPI: new TrackAPI()
+    tmdbApi: new TmdbApi(),
+    openSubtitlesApi: new OpenSubtitlesApi(),
+    trackApi: new TrackApi()
 })
 
 const kvCache = { cache: new KVCache() }
 
 const createServer = graphQLOptions =>
   new ApolloServer({
-    typeDefs,
+    typeDefs: schema,
     resolvers,
     introspection: true,
     dataSources,
     ...(graphQLOptions.kvCache ? kvCache : {}),
   })
 
-const handler = (request, graphQLOptions) => {
+export const apollo = (request, graphQLOptions) => {
   const server = createServer(graphQLOptions)
   return graphqlCloudflare(() => server.createGraphQLServerOptions(request))(request)
 }
-
-module.exports = handler
