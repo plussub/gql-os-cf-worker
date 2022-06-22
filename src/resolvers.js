@@ -2,6 +2,10 @@ import iso639Map from './iso639Map.json';
 
 export const resolvers = {
   Query: {
+    listContentLanguages: async (_source, _params, { dataSources }) => {
+        return dataSources.openSubtitlesApi.listContentLanguages();
+    },
+
     videoSearch: async (_source, { query }, { dataSources }) => {
       const entries = (await dataSources.tmdbApi.search(query))
         .filter((result) => result.media_type !== 'person')
