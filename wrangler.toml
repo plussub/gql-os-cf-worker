@@ -1,3 +1,4 @@
 name = "gql-os-cf-worker"
 compatibility_date = "2022-04-05"
 node_compat = true
+main = "src/index.js"
