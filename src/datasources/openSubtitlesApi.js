@@ -16,6 +16,7 @@ export class OpenSubtitlesApi extends RESTDataSource {
   }
 
   async search({tmdb_id, language, season_number, episode_number}) {
+    console.log("test");
     const seasonNumberObj = season_number ? {season_number} : {};
     const episodeNumberObj = episode_number ? {episode_number} : {};
     return this.get(`subtitles`, {
