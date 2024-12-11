@@ -15,6 +15,7 @@ export class OpenSubtitlesApi extends RESTDataSource {
   async listContentLanguages() {
     return this.get(`infos/languages`)
       .catch((error) => {
+
         console.error(error);
         return ({ data: [] });
       });
