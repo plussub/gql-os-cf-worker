@@ -12,13 +12,8 @@ export class OpenSubtitlesApi extends RESTDataSource {
   }
 
   async listContentLanguages() {
-    try{
-      return this.get(`infos/languages`, null, { headers: this.headers });
-    } catch {
-      return {
-        data: []
-      }
-    }
+    return this.get(`infos/languages`, null, { headers: this.headers })
+      .catch((error) => ({data: []}));
   }
 
   async search({tmdb_id, language, season_number, episode_number}) {
