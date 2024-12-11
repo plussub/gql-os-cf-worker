@@ -7,7 +7,8 @@ export class OpenSubtitlesApi extends RESTDataSource {
     this.baseURL = 'https://api.opensubtitles.com/api/v1/';
     this.headers = {
       'Api-Key': OPEN_SUBTITLES_API_KEY,
-      'User-Agent': 'plussub_client v1'
+      'User-Agent': 'plussub_client v1',
+      'Accept': 'application/json'
     };
   }
 
